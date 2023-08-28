@@ -155,98 +155,6 @@ void ExponentialSearch(int size, int* array, int target)
     }
     printf("%s", "Target not found\n");
 }
-//MISCELLANEOUS
-void Palindrome(int* array, int size)
-{
-    int left = 0, right = size - 1;
-    while (left < right)
-    {
-        if (array[left] != array[right]) { printf("%s", "It is not a palindrom\n"); return; }
-        left++; right--;
-    }
-    printf("%s", "It is a palindrom\n");
-}
-void SubArraySum(int* array, int size, int target)
-{
-    for (int i = 1; i < size; i++) array[i] = array[i - 1] + array[i];
-    for (int i = 0; i < size; i++)
-    {
-        for (int j = i + 1; j < size; j++)
-        {
-            if (array[j] - array[i] == target) { printf("%d found between index %d and %d\n", target, i + 1, j); return; }
-        }
-    }
-    printf("%s", "Target not found\n");
-}
-int LongestCommonSubsequence(char* string1, char* string2, int size1, int size2)
-{
-    int table[size1 + 1][size2 + 1];
-    for (int i = 0; i <= size1; i++)
-    {
-        for (int j = 0; j <= size2; j++)
-        {
-            if (i == 0 || j == 0) table[i][j] = 0;
-            else if (string1[i - 1] == string2[j - 1]) table[i][j] = table[i - 1][j - 1] + 1;
-            else table[i][j] = table[i - 1][j] > table[i][j - 1] ? table[i - 1][j] : table[i][j - 1];
-        }
-    }
-    return table[size1][size2];
-}
-void FloodFill(int** array, int size, int row, int column, int target, int replacement)
-{
-    if (row < 0 || column < 0 || row >= size || column >= size) return;
-    if (array[row][column] != target) return;
-    array[row][column] = replacement;
-    FloodFill(array, size, row + 1, column, target, replacement); FloodFill(array, size, row - 1, column, target, replacement);
-    FloodFill(array, size, row, column + 1, target, replacement); FloodFill(array, size, row, column - 1, target, replacement);
-}
-void LeeAlgorithm(int** array, int size, int row, int column, int target, int replacement)
-{
-    int queue[size * size][2], front = 0, rear = 0;
-    queue[rear][0] = row; queue[rear][1] = column; rear++;
-    while (front < rear)
-    {
-        int currentRow = queue[front][0], currentColumn = queue[front][1]; front++;
-        if (currentRow < 0 || currentColumn < 0 || currentRow >= size || currentColumn >= size) continue;
-        if (array[currentRow][currentColumn] != target) continue;
-        array[currentRow][currentColumn] = replacement;
-        queue[rear][0] = currentRow + 1; queue[rear][1] = currentColumn; rear++;
-        queue[rear][0] = currentRow - 1; queue[rear][1] = currentColumn; rear++;
-        queue[rear][0] = currentRow; queue[rear][1] = currentColumn + 1; rear++;
-        queue[rear][0] = currentRow; queue[rear][1] = currentColumn - 1; rear++;
-    }
-}
-int SubsetSum(int* array, int size, int target)
-{
-    if (target == 0) return 1;
-    if (size == 0) return 0;
-    if (array[size - 1] > target) return SubsetSum(array, size - 1, target);
-    return SubsetSum(array, size - 1, target) || SubsetSum(array, size - 1, target - array[size - 1]);
-}
-int LowerBound(int *array, int N, int X)
-{
-	int low = 0, high = N;
-	while (low < high)
-    {
-		int mid = (low + high) / 2;
-    	if (X <= array[mid]) high = mid;
-    	else low = mid + 1;
-	}
-	if (low < N && array[low] < X) low++;
-    return low;
-}
-int UpperBound(int *array, int N, int X)
-{
-	int low = 0, high = N;
-    while (low < high)
-    {
-        int mid = (low + high) / 2;
-        if (X >= array[mid]) low = mid + 1;
-        else high = mid;
-    }
-    if (low < N && array[low] <= X) low++;
-    return low;
-}
 //HASH FUNCTIONS
 unsigned long hashDJB2(char *str)
 {
@@ -290,3 +198,4 @@ unsigned long hashBKDR(char *str)
     while (c = *str++) hash = (hash * 131) + c;
     return hash;
 }
+//s
