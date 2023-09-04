@@ -1,5 +1,9 @@
 #include <stdio.h>
-//SORTING
+#include <stdlib.h>
+#include <string.h>
+#define min(a, b) (a < b ? a : b)
+#define max(a, b) (a > b ? a : b)
+//SORTING ALGORITHM
 void BubbleSort(int size, int* array)
 {
     for (int i = 0; i < size - 1; i++)
@@ -119,7 +123,7 @@ void RadixSort(int* array, int size)
         for (int i = 0; i < size; i++) array[i] = output[i];
     }
 }
-//SEARCHING
+//SEARCHING ALGORITHM
 void LinearSearch(int size, int* array, int target)
 {
     for (int i = 0; i < size; i++)
@@ -155,47 +159,197 @@ void ExponentialSearch(int size, int* array, int target)
     }
     printf("%s", "Target not found\n");
 }
-//HASH FUNCTIONS
-unsigned long hashDJB2(char *str)
+//COIN CHANGE
+int coin_change(int x)
 {
-    unsigned long hash = 5381; int c;
-    while (c = *str++) hash = ((hash << 5) + hash) + c;
-    return hash;
+    if (x < 0) return INT_MAX;
+    if (x == 0) return 0;
+    return min(coin_change(x - 1), min(coin_change(x - 3), coin_change(x - 4))) + 1;
 }
-unsigned long hashSDBM(char *str)
+int coin_change_memo(int x)
 {
-    unsigned long hash = 0; int c;
-    while (c = *str++) hash = c + (hash << 6) + (hash << 16) - hash;
-    return hash;
+    if (x < 0) return INT_MAX;
+    if (x == 0) return 0;
+    if (DP[x] != -1) return DP[x];
+    DP[x] = min(coin_change_memo(x - 1), min(coin_change_memo(x - 3), coin_change_memo(x - 4))) + 1;
+    return DP[x];
 }
-unsigned long hashLOSELOSE(char *str)
+int coin_change_tabulation(int x)
 {
-    unsigned long hash = 0; int c;
-    while (c = *str++) hash += c;
-    return hash;
+    DP[0] = 0;
+    for (int i = 1; i <= x; i++)
+    {
+        DP[i] = DP[i - 1] + 1;
+        if (i >= 3) DP[i] = min(DP[i], DP[i - 3] + 1);
+        if (i >= 4) DP[i] = min(DP[i], DP[i - 4] + 1);
+    }
+    return DP[x];
 }
-unsigned long hashRS(char *str)
+//KNAPSACK LIKE PROBLEM
+int knapsack_like(int N, int *W, int *V, int idx, int cap)
 {
-    unsigned long b = 378551; unsigned long a = 63689; unsigned long hash = 0; int c;
-    while (c = *str++) { hash = hash * a + c; a = a * b; }
-    return hash;
+    if (cap < 0) return INT_MIN;
+    if (idx > N) return 0;
+    int ret = 0;
+    ret = max(ret, knapsack_like(N, W, V, idx + 1, cap));
+    ret = max(ret, knapsack_like(N, W, V, idx + 1, cap - W[idx]) + V[idx]);
+    return ret;
 }
-unsigned long hashJS(char *str)
+int knapsack_like_memo(int N, int *W, int *V, int idx, int cap)
 {
-    unsigned long hash = 1315423911; int c;
-    while (c = *str++) hash ^= ((hash << 5) + c + (hash >> 2));
-    return hash;
+    if (cap < 0) return INT_MIN;
+    if (idx > N) return 0;
+    int &ret = DP_2D[idx][cap];
+    if (ret != -1) return ret;
+    ret = 0;
+    ret = max(ret, knapsack_like_memo(N, W, V, idx + 1, cap));
+    ret = max(ret, knapsack_like_memo(N, W, V, idx + 1, cap - W[idx]) + V[idx]);
+    return ret;
 }
-unsigned long hashELF(char *str)
+int knapsack_like_tabulation(int N, int *W, int *V, int cap)
 {
-    unsigned long hash = 0; unsigned long x = 0; int c;
-    while (c = *str++) { hash = (hash << 4) + c; if ((x = hash & 0xF0000000L) != 0) { hash ^= (x >> 24); hash &= ~x; } }
-    return hash;
+    for (int i = 0; i <= N; i++)
+    {
+        for (int j = 0; j <= cap; j++)
+        {
+            if (j == 0) DP_2D[i][j] = 0;
+            else if (i == 0) DP_2D[i][j] = INT_MIN;
+            else
+            {
+                DP_2D[i][j] = DP_2D[i - 1][j];
+                if (j >= W[i - 1]) DP_2D[i][j] = max(DP_2D[i][j], DP_2D[i - 1][j - W[i - 1]] + V[i - 1]);
+            }
+        }
+    }
+    return DP_2D[N][cap];
 }
-unsigned long hashBKDR(char *str)
+//LONGEST INCREASING SUBSEQUENCES
+int longest_increasing_subsequence(int N, int *A, int idx, int prev)
 {
-    unsigned long hash = 0; int c;
-    while (c = *str++) hash = (hash * 131) + c;
-    return hash;
+    if (idx == N) return 0;
+    int ret = 0;
+    if (A[idx] > prev) ret = max(ret, longest_increasing_subsequence(N, A, idx + 1, A[idx]) + 1);
+    ret = max(ret, longest_increasing_subsequence(N, A, idx + 1, prev));
+    return ret;
+}
+int longest_increasing_subsequence_memo(int N, int *A, int idx, int prev)
+{
+    if (idx == N) return 0;
+    int &ret = DP_2D[idx][prev];
+    if (ret != -1) return ret;
+    ret = 0;
+    if (A[idx] > prev) ret = max(ret, longest_increasing_subsequence_memo(N, A, idx + 1, A[idx]) + 1);
+    ret = max(ret, longest_increasing_subsequence_memo(N, A, idx + 1, prev));
+    return ret;
+}
+int longest_increasing_subsequence_tabulation(int N, int *A)
+{
+    for (int i = 0; i < N; i++)
+    {
+        DP_2D[i][0] = 0;
+        for (int j = 1; j <= 1000; j++) DP_2D[i][j] = INT_MIN;
+    }
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j <= 1000; j++)
+        {
+            if (j == 0) DP_2D[i][j] = 0;
+            else if (i == 0) DP_2D[i][j] = INT_MIN;
+            else
+            {
+                DP_2D[i][j] = DP_2D[i - 1][j];
+                if (A[i] > j) DP_2D[i][j] = max(DP_2D[i][j], DP_2D[i - 1][A[i]] + 1);
+            }
+        }
+    }
+    int ret = 0;
+    for (int i = 0; i < N; i++) ret = max(ret, DP_2D[i][0]);
+    return ret;
+}
+//LONGEST COMMON SUBSEQUENCES
+int longest_common_subsequence(char *string1, char *string2, int idx1, int idx2)
+{
+    if (idx1 == 0 || idx2 == 0) return 0;
+    int ret = 0;
+    if (string1[idx1 - 1] == string2[idx2 - 1]) ret = max(ret, longest_common_subsequence(string1, string2, idx1 - 1, idx2 - 1) + 1);
+    ret = max(ret, longest_common_subsequence(string1, string2, idx1 - 1, idx2));
+    ret = max(ret, longest_common_subsequence(string1, string2, idx1, idx2 - 1));
+    return ret;
+}
+int longest_common_subsequence_memo(char *string1, char *string2, int idx1, int idx2)
+{
+    if (idx1 == 0 || idx2 == 0) return 0;
+    int &ret = DP_2D[idx1][idx2];
+    if (ret != -1) return ret;
+    ret = 0;
+    if (string1[idx1 - 1] == string2[idx2 - 1]) ret = max(ret, longest_common_subsequence_memo(string1, string2, idx1 - 1, idx2 - 1) + 1);
+    ret = max(ret, longest_common_subsequence_memo(string1, string2, idx1 - 1, idx2));
+    ret = max(ret, longest_common_subsequence_memo(string1, string2, idx1, idx2 - 1));
+    return ret;
+}
+int longest_common_subsequence_tabulation(char *string1, char *string2, int idx1, int idx2)
+{
+    for (int i = 0; i <= idx1; i++)
+    {
+        for (int j = 0; j <= idx2; j++)
+        {
+            if (i == 0 || j == 0) DP_2D[i][j] = 0;
+            else
+            {
+                DP_2D[i][j] = max(DP_2D[i - 1][j], DP_2D[i][j - 1]);
+                if (string1[i - 1] == string2[j - 1]) DP_2D[i][j] = max(DP_2D[i][j], DP_2D[i - 1][j - 1] + 1);
+            }
+        }
+    }
+    return DP_2D[idx1][idx2];
+}
+//TRAVELING SLAESMAN PROBLEM
+int traveling_salesman_problem(int N, int W[101][101], int idx, int visited)
+{
+    if (visited == (1 << N) - 1) return W[idx][0];
+    int ret = INT_MAX;
+    for (int i = 0; i < N; i++)
+    {
+        if (visited & (1 << i)) continue;
+        ret = min(ret, traveling_salesman_problem(N, W, i, visited | (1 << i)) + W[idx][i]);
+    }
+    return ret;
+}
+int traveling_salesman_problem_memo(int N, int W[101][101], int idx, int visited)
+{
+    if (visited == (1 << N) - 1) return W[idx][0];
+    int &ret = DP_2D[idx][visited];
+    if (ret != -1) return ret;
+    ret = INT_MAX;
+    for (int i = 0; i < N; i++)
+    {
+        if (visited & (1 << i)) continue;
+        ret = min(ret, traveling_salesman_problem_memo(N, W, i, visited | (1 << i)) + W[idx][i]);
+    }
+    return ret;
+}
+int traveling_salesman_problem_tabulation(int N, int W[101][101])
+{
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < (1 << N); j++)
+        {
+            if (j == 0) DP_2D[i][j] = W[i][0];
+            else DP_2D[i][j] = INT_MAX;
+        }
+    }
+    for (int i = 0; i < (1 << N); i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            if (i & (1 << j)) continue;
+            for (int k = 0; k < N; k++)
+            {
+                if (i & (1 << k)) continue;
+                DP_2D[k][i | (1 << k)] = min(DP_2D[k][i | (1 << k)], DP_2D[j][i] + W[j][k]);
+            }
+        }
+    }
+    return DP_2D[0][(1 << N) - 1];
 }
 //s
