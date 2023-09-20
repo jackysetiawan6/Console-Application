@@ -4,10 +4,10 @@
 #define min(a, b) (a < b ? a : b)
 #define max(a, b) (a > b ? a : b)
 
-using namespace std;
-
 int DP[1000000] = {};
 int DP_2D[1000][1000] = {};
+
+// Eight Queen Problem
 
 
 
@@ -19,6 +19,6 @@ void initialize()
 int main(int argc, char** argv)
 {
     initialize();
-    printf("%.0lf\n", (double)(1 << 30));
+    printf("%d\n", eight_queen_problem(8, 0, 8));
     return 0;
 }
