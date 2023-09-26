@@ -1,24 +1,4 @@
-# import math
-# import turtle
-# turtle.title("To Regina")
-# turtle.shape("turtle")
-# turtle.setup(width=900, height=700)
-# turtle.speed(0)
-# turtle.bgcolor('black')
-# turtle.color('red')
-# def heart1(h):
-#     return 15 * math.sin(h) ** 3
-# def heart2(h):
-#     return 12 * math.cos(h) - 5 * math.cos(2 * h) - 2 * math.cos(3 * h) - math.cos(4 * h)
-# for i in range(600):
-#     x, y = heart1(i) * 20, heart2(i) * 20
-#     turtle.goto(x, y)
-# turtle.penup()
-# turtle.goto(0, -45)
-# turtle.pendown()
-# turtle.write('I Love You', align='center', font=('Arial', 50, 'bold'))
-# turtle.done()
-
+#region Get Location Details based on IP Address
 
 # import requests
 # def get_ip():
@@ -45,3 +25,30 @@
 #     return location_data
 # for key, value in get_location(get_ip()).items():
 #     print(f'{key:20}: {value}')
+
+#endregion
+
+#region Beelingua Automation
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+base_address = 'https://newbinusmaya.binus.ac.id/beelingua/'
+current_address = 'https://newbinusmaya.binus.ac.id/beelingua/student/class/ec84d186-38f0-416c-b522-2efc0149686a/session/f7aced90-5950-4c56-b468-ce54923660d9/content/939544d4-f6f1-4192-9863-7bbe8cd1a98b/BlExercise/06561ba6-a050-495d-bb37-2d10ad57d947'
+
+def get_driver():
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+    return driver
+
+browser = get_driver()
+browser.get(current_address)
+
+# get text from element <p> with class ' '
+element = browser.find_element_by_class_name(' ')
+print(element.text)
+
+browser.quit()
+
+#endregion

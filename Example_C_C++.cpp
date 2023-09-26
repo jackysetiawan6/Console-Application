@@ -9,8 +9,6 @@ int DP_2D[1000][1000] = {};
 
 // Eight Queen Problem
 
-
-
 void initialize()
 {
     memset(DP, -1, sizeof(DP));

@@ -1,3 +1,1 @@
 # Console-Application
-
-Coding Trial
