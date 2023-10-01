@@ -28,27 +28,6 @@
 
 #endregion
 
-#region Beelingua Automation
-
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
-base_address = 'https://newbinusmaya.binus.ac.id/beelingua/'
-current_address = 'https://newbinusmaya.binus.ac.id/beelingua/student/class/ec84d186-38f0-416c-b522-2efc0149686a/session/f7aced90-5950-4c56-b468-ce54923660d9/content/939544d4-f6f1-4192-9863-7bbe8cd1a98b/BlExercise/06561ba6-a050-495d-bb37-2d10ad57d947'
-
-def get_driver():
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-    return driver
-
-browser = get_driver()
-browser.get(current_address)
-
-# get text from element <p> with class ' '
-element = browser.find_element_by_class_name(' ')
-print(element.text)
-
-browser.quit()
+#region NOTHING
 
 #endregion
