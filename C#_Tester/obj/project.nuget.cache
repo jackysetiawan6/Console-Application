@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "r+0SbYwiaFBVTiphxn/LZmCcIvKGRMUltUmXEbg2eUdF1X1+Tht6LimkRYlfYfD+tZxIGF1LH6czxLOMKoPUsQ==",
+  "success": true,
+  "projectFilePath": "D:\\Programming\\Console-Application\\C#_Tester\\C#_Tester.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jacky\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",
+    "C:\\Users\\jacky\\.nuget\\packages\\system.management\\7.0.2\\system.management.7.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
