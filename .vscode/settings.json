@@ -1,7 +1,9 @@
 {
-    "C_Cpp.errorSquiggles": "disabled",
-    "files.associations": {
-        "limits.h": "c"
-    },
-    "dotnet.defaultSolution": "C#_Tester.sln"
+  "C_Cpp.errorSquiggles": "disabled",
+  "files.associations": {
+    "limits.h": "c"
+  },
+  "dotnet.defaultSolution": "C#_Tester.sln",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "basic"
 }

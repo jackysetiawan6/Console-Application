@@ -94,3 +94,4 @@ D:\Programming\Console-Application\Experimental\obj\Release\net5.0\refint\Experi
 D:\Programming\Console-Application\Experimental\obj\Release\net5.0\Experimental.pdb
 D:\Programming\Console-Application\Experimental\obj\Release\net5.0\Experimental.genruntimeconfig.cache
 D:\Programming\Console-Application\Experimental\obj\Release\net5.0\ref\Experimental.dll
+D:\Programming\Console-Application\Experimental\bin\Release\net5.0\System.Diagnostics.PerformanceCounter.dll

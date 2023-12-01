@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oUsC0oncctBd0IZknq50CglNGEGh8FNY37iwa9UyCPY4mNmeaNr4yfiAUNXB4QlsnuvS8y/dKPepVKnn6V/bUg==",
+  "dgSpecHash": "+hyYOb9o811wHDJyVwLwGZOfdlKKn8w09hOiiEYNHkMKbYpM4z2jub82JaUKxDSmG6Cst0PGcZYm8ETLCPW6mQ==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Console-Application\\Experimental\\Experimental.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\강현식\\.nuget\\packages\\perfolizer\\0.2.1\\perfolizer.0.2.1.nupkg.sha512",
     "C:\\Users\\강현식\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",
     "C:\\Users\\강현식\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
+    "C:\\Users\\강현식\\.nuget\\packages\\system.diagnostics.performancecounter\\8.0.0\\system.diagnostics.performancecounter.8.0.0.nupkg.sha512",
     "C:\\Users\\강현식\\.nuget\\packages\\system.management\\5.0.0\\system.management.5.0.0.nupkg.sha512",
     "C:\\Users\\강현식\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\강현식\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
