@@ -1,0 +1,42 @@
+LOCUS       AU098419                 300 bp    mRNA    linear   EST 29-JAN-2011
+DEFINITION  AU098419 Sugano Homo sapiens cDNA library Homo sapiens cDNA clone
+            CAS03528 5' similar to Homo sapien interleukin-1 beta convertase
+            (IL1BCE) mRNA, mRNA sequence.
+ACCESSION   AU098419
+VERSION     AU098419.1
+DBLINK      BioSample: SAMN00163320
+KEYWORDS    EST.
+SOURCE      Homo sapiens (human)
+  ORGANISM  Homo sapiens
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini;
+            Catarrhini; Hominidae; Homo.
+REFERENCE   1  (bases 1 to 300)
+  AUTHORS   Suzuki,Y., Tsunoda,T., Sese,J., Taira,H., Mizushima-Sugano,J.,
+            Hata,H., Ota,T., Isogai,T., Tanaka,T., Nakamura,Y., Suyama,A.,
+            Sakaki,Y., Morishita,S., Okubo,K. and Sugano,S.
+  TITLE     Identification and characterization of the potential promoter
+            regions of 1031 kinds of human genes
+  JOURNAL   Genome Res. 11 (5), 677-684 (2001)
+   PUBMED   11337467
+COMMENT     Contact: Yutaka Suzuki
+            Department of Virology
+            Institute of Medical Science, University of Tokyo
+            4-6-1, Shirokanedai, Minatoku, Tokyo 108-8639, Japan
+            Suzuki,Y., Yoshitomo-Nakagawa,K., Maruyama,K., Suyama,A. and
+            Sugano,S. Construction and characterization of a full
+            length-enriched and a 5'-end-enriched cDNA library. Gene 200 (1-2),
+            149-156 (1997).
+FEATURES             Location/Qualifiers
+     source          1..300
+                     /organism="Homo sapiens"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:9606"
+                     /clone="CAS03528"
+                     /clone_lib="SAMN00163320 Sugano Homo sapiens cDNA library"
+ORIGIN      
+        1 agtttcagtc acacaagaag ggaggagaga aaagccatgg ccgacaaggt cctgaaggag
+       61 aagagaaagc tgtttatccg ttccatgggt gaaggtacaa taaatggctt actggatgaa
+      121 ttattacaga caagggtgct gaacaaggaa gagatggaga aagtaaaacg tgaaaatgct
+      181 acagttatgg ataagacccg agctttgatt gactccgtta ttccgaaagg ggcacaggca
+      241 tgccaaattt gcatcacata catttgtgaa gaagacagtt acctggcagg gacgctggga
