@@ -11,7 +11,7 @@ void squares(), windows(), rot13(), pascaltriangle(), glitch();
 
 void trimmed(), diamond(), christmas(), timer();
 
-int main() { glitch(); return 0; }
+int main() { timer(); return 0; }
 
 void calculator()
 {
